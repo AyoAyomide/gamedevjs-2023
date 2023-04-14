@@ -8,7 +8,7 @@ export default defineConfig((command, mode) => {
     }
   } else {
     return {
-      base: '/maze',
+      base: '/gamedevjs-2023',
       plugins: [
         viteStaticCopy({
           targets: [
