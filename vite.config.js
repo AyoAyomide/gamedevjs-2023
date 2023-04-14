@@ -13,6 +13,10 @@ export default defineConfig((command, mode) => {
         viteStaticCopy({
           targets: [
             {
+              src: 'src/gltf/*.glb',
+              dest: 'src/gltf'
+            },
+            {
               src: 'src/sounds/*',
               dest: 'src/sounds'
             },

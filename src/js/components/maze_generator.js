@@ -22,17 +22,18 @@ AFRAME.registerComponent('maze_generator', {
                     wall.setAttribute('position', `${centerPos - cellIndex} 1.25 ${rowIndex + 0.5}`);
                     wall.setAttribute('scale', '1 2.5 1');
                     wall.setAttribute('class', 'box');
+                    wall.setAttribute('material', 'side: double;color: #000000; metalness: 0.5; roughness: 0.5;');
                     parent.appendChild(wall);
                 }else{
                     // Add nav-mesh for path
-                    let wall_nav_mesh = document.createElement('a-entity');
-                    wall_nav_mesh.setAttribute('geometry', "primitive: plane; buffer: false");
-                    wall_nav_mesh.setAttribute('position', `${centerPos - cellIndex} 0.01 ${rowIndex + 0.5}`);
-                    wall_nav_mesh.setAttribute('scale', '1 1 1');
-                    wall_nav_mesh.setAttribute('rotation', '-90 0 0');
-                    wall_nav_mesh.setAttribute('class', 'box');
-                    wall_nav_mesh.setAttribute('nav-mesh', '');
-                    parent.appendChild(wall_nav_mesh);
+                    // let wall_nav_mesh = document.createElement('a-entity');
+                    // wall_nav_mesh.setAttribute('geometry', "primitive: plane; buffer: false");
+                    // wall_nav_mesh.setAttribute('position', `${centerPos - cellIndex} 0.01 ${rowIndex + 0.5}`);
+                    // wall_nav_mesh.setAttribute('scale', '1 1 1');
+                    // wall_nav_mesh.setAttribute('rotation', '-90 0 0');
+                    // wall_nav_mesh.setAttribute('class', 'box');
+                    // wall_nav_mesh.setAttribute('nav-mesh', '');
+                    // parent.appendChild(wall_nav_mesh);
                 }
             });
         });

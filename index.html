@@ -10,13 +10,13 @@
 
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <!-- <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script> -->
-    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@fb96ab2/dist/aframe-extras.min.js"></script>
     
     <script type="module" src="./src/js/index.js"></script>
     <script type="module" src="./src/js/components/maze_generator.js"></script>
     <script type="module" src="./src/js/components/check_collision.js"></script>
-    <script type="module" src="./src/js/components/col.js"></script>
+    <script type="module" src="./src/js/components/nav_mesh.js"></script>
   </head>
 
   <body>
@@ -24,16 +24,16 @@
       environment="preset: forest;  grid: 1x1"
       renderer="antialias: true"
     >
-      <a-asset> </a-asset>
+      <a-asset>
+        <a-asset-item id="maze_1" src="./src/gltf/nav-mesh.glb"></a-asset-item>
+      </a-asset>
 
       <!-- grid box -->
       <a-entity maze_generator id="grid">
 
-        </a-entity>
+      </a-entity>
 
-      <!-- <a-entity geometry="primitive: plane; height: 10; width: 10;"
-      material="color: indigo; side: double;"
-      rotation="-90 0 0" class="box" position="0 0 -1" nav-mesh></a-entity> -->
+      <a-gltf-model class="navmesh" src="#maze_1" nav-mesh></a-gltf-model>
 
       <a-entity
         id="rig"
@@ -41,7 +41,7 @@
         movement-controls="speed: 0.5;constrainToNavMesh: true;"
         aabb-collider="objects: .box;debug:true"
       >
-        <a-camera look-controls="pointerLockEnabled: true">
+        <a-camera look-controls="pointerLockEnabled: true" navmesh-constraint="navmesh:.navmesh; fall: 0.5; height: 1.65;">
           <a-cursor
             position="0 0 -0.5"
             raycaster="objects: .box"
