@@ -1,42 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>itch</title>
-    <link type="text/css" rel="stylesheet" href="/css/style.css">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
-    <script
-        src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@fb96ab2/dist/aframe-extras.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
 
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script> -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@fb96ab2/dist/aframe-extras.min.js"></script>
+    
     <script type="module" src="./src/js/index.js"></script>
     <script type="module" src="./src/js/components/maze_generator.js"></script>
-</head>
+    <script type="module" src="./src/js/components/check_collision.js"></script>
+    <script type="module" src="./src/js/components/col.js"></script>
+  </head>
 
-<body>
-    <a-scene environment="preset: forest;  grid: 1x1" renderer="antialias: true">
-        <a-asset>
-        </a-asset>
+  <body>
+    <a-scene
+      environment="preset: forest;  grid: 1x1"
+      renderer="antialias: true"
+    >
+      <a-asset> </a-asset>
 
-        <!-- grid box -->
-        <a-entity maze_generator id="grid">
+      <!-- grid box -->
+      <a-entity maze_generator id="grid">
 
         </a-entity>
 
+      <!-- <a-entity geometry="primitive: plane; height: 10; width: 10;"
+      material="color: indigo; side: double;"
+      rotation="-90 0 0" class="box" position="0 0 -1" nav-mesh></a-entity> -->
 
-        <a-entity id="rig" position="0 0 10" movement-controls>
-            <a-camera look-controls="pointerLockEnabled: true"></a-camera>
-            <a-entity id="left" oculus-touch-controls="hand: left"></a-entity>
-            <a-entity id="right" move oculus-touch-controls="hand: right"></a-entity>
-        </a-entity>
-
+      <a-entity
+        id="rig"
+        position="0 0 10"
+        movement-controls="speed: 0.5;constrainToNavMesh: true;"
+        aabb-collider="objects: .box;debug:true"
+      >
+        <a-camera look-controls="pointerLockEnabled: true">
+          <a-cursor
+            position="0 0 -0.5"
+            raycaster="objects: .box"
+            material="opacity:0"
+          ></a-cursor>
+        </a-camera>
+        <a-entity id="left" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity
+          id="right"
+          move
+          oculus-touch-controls="hand: right"
+        ></a-entity>
+      </a-entity>
     </a-scene>
-</body>
-
+  </body>
 </html>
