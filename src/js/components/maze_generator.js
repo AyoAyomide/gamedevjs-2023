@@ -1,4 +1,5 @@
 import { maze } from "../maze_level";
+// import { nextTick } from 'aframe';
 
 AFRAME.registerComponent('maze_generator', {
     schema: {
@@ -11,30 +12,45 @@ AFRAME.registerComponent('maze_generator', {
         this.maze_gen(parent);
     },
     maze_gen: function (parent) {
-        const centerPos = (maze.level1[0].length - 1) * 0.5;
+        const mazeWidth = 4;
+        const mazeHeight = 10;
+        const mazeDepth = 4;
+        const centerPosX = (maze.level1[0].length - 1) * (mazeWidth / 2);
+        const centerPosZ = (maze.level1.length - 1) * (mazeDepth / 2);
+        let pos;
         // Append child according to maze data
         maze.level1.forEach((row, rowIndex) => {
             row.forEach((cell, cellIndex) => {
-                
                 if (cell === 1) {
                     let wall = document.createElement('a-entity');
+                    pos = {
+                        z: centerPosX - (cellIndex * mazeWidth),
+                        y: mazeHeight / 2,
+                        x: centerPosZ - (rowIndex * mazeDepth)
+                    }
                     wall.setAttribute('geometry', "primitive: box; buffer: false");
-                    wall.setAttribute('position', `${centerPos - cellIndex} 1.25 ${rowIndex + 0.5}`);
-                    wall.setAttribute('scale', '1 2.5 1');
+                    wall.setAttribute('position', `${pos.z} ${pos.y} ${pos.x}`);
+                    wall.setAttribute('scale', `${mazeWidth} ${mazeHeight} ${mazeDepth}`);
+                    // wall.setAttribute('shadow','');
                     wall.setAttribute('class', 'box');
-                    // wall.setAttribute('material', 'side: double;color: #fff; metalness: 0.5; roughness: 0.5;');
+                    wall.setAttribute('material', 'color: #9aa0a6;roughness: 1;');
                     parent.appendChild(wall);
-                }else{
-                    // Add nav-mesh for path
-                    let wall_nav_mesh = document.createElement('a-entity');
-                    wall_nav_mesh.setAttribute('geometry', "primitive: plane; buffer: false");
-                    wall_nav_mesh.setAttribute('position', `${centerPos - cellIndex} 0.01 ${rowIndex + 0.5}`);
-                    wall_nav_mesh.setAttribute('scale', '1 1 1');
-                    wall_nav_mesh.setAttribute('rotation', '-90 0 0');
-                    wall_nav_mesh.setAttribute('class', 'box');
-                    // parent.appendChild(wall_nav_mesh);
                 }
             });
         });
+        // set ui position from parent first child
+        let ui = document.querySelector('#maze_ui');
+        let player = document.querySelector('#rig');
+        let firstChildPos = parent.firstElementChild.object3D.position;
+        setTimeout(() => {
+            // player.setAttribute('position',`0 0 ${firstChildPos.z * 2.3}`)
+            player.object3D.position.z = firstChildPos.z * 2.3;
+            ui.object3D.position.z = firstChildPos.z * 1.6;
+        }, 1);
+
+        // set finish line position
+        let line = document.querySelector('#finish_line');
+        line.setAttribute('position', `0 0 ${pos.x + -2}`);
+
     },
 });

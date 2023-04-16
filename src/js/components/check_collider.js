@@ -52,7 +52,7 @@ AFRAME.registerComponent('collider-check', {
     if (gamePassed === false) {
       gameStarted = false;
       counterUI.setAttribute('value', "Game Over");
-      player.object3D.position.set(0, 0, 10);
+      player.object3D.position.z = firstElementChild.object3D.position.z + 6;
       player.setAttribute('movement-controls', "enabled", "false");
       maze_ui.setAttribute('visible', 'true');
       maze_text.setAttribute('value', "Restart");

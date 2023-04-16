@@ -23,7 +23,9 @@
 </head>
 
 <body>
-  <a-scene environment="preset: yavapai;" renderer="antialias: true">
+  <!-- -->
+  <a-scene renderer="antialias: true" environment="preset: yavapai;playArea:2;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;">
+    
     <a-asset>
       <img id="logo" src="./src/img/logo.png">
       <img id="won" src="./src/img/won.png">
@@ -33,20 +35,21 @@
       <audio id="bgm" src="./src/sounds/bgm.wav" preload="auto"></audio>
     </a-asset>
 
+    <!-- <a-box position="0 0.5 0" shadow=""></a-box> -->
     <!-- grid box -->
-    <a-entity maze_generator id="grid"></a-entity>
-    <!-- <a-gltf-model class="navmesh" src="#maze_1" nav-mesh position="-0.009 0 0" visible="false"></a-gltf-model> -->
+    <a-entity shadow="receive:false" maze_generator id="grid"></a-entity>
+
 
     <!-- finish line -->
-    <a-entity game_passed>
+    <a-entity game_passed id="finish_line">
       <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="10" class="win"></a-plane>
-      <a-image id="passed_image" position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2" visible="false" sound="src: #win"></a-image>
+      <a-image id="passed_image" position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2" visible="false"
+        sound="src: #win"></a-image>
       <a-text position="0 2 -4" rotation="10 0 0" align="center" value="More levels coming soon"
         visible="false"></a-text>
     </a-entity>
 
     <!-- maze ui -->
-
     <a-entity position="0 0 6" id="maze_ui">
       <a-image position="0 4.5 -0.2" rotation="10 0 0" src="#logo" width="5" height="1" material=""
         geometry=""></a-image>
@@ -58,15 +61,15 @@
     </a-entity>
 
     <!-- camera unit -->
-    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 10"
+    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 5"
       movement-controls="camera:#vr_camera;speed: 0.5;enabled:true" material="opacity:0;">
 
-      <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;"
-        position="0 1 0" visible="false">
+      <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
+        visible="false">
 
       </a-entity>
 
-      <a-camera id="vr_camera" near="0.1" wasd-controls-enabled="false" sound="src:#noise;autoplay:true;loop:true">
+      <a-camera id="vr_camera" wasd-controls-enabled="false" sound="src:#noise;autoplay:false;loop:true">
 
         <a-text color=" black" position="0 1 -2" align="center" width="3" value="5"
           geometry="primitive:plane;height:0.2; width:0.2" material="opacity:0" id="counter_ui"></a-text>
