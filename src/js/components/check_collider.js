@@ -7,7 +7,10 @@ AFRAME.registerComponent('collider-check', {
 
   init: function () {
     this.el.addEventListener('raycaster-intersection', (event) => {
-      let el = event.detail.els[0];
+      let maze_button = document.querySelector('#maze_button');
+      let vr_camera = document.querySelector('#vr_camera');
+      maze_button.components.sound.playSound();
+      vr_camera.setAttribute('sound', 'src', '#bgm');
       gameStarted = true;
       this.allowMovement();
       this.hideUI();
@@ -46,6 +49,7 @@ AFRAME.registerComponent('collider-check', {
     let maze_text = document.querySelector('#maze_button');
     let maze_intro = document.querySelector('#maze_intro');
     let maze_ui = document.querySelector('#maze_ui');
+    let vr_camera = document.querySelector('#vr_camera');
     if (gamePassed === false) {
       gameStarted = false;
       counterUI.setAttribute('value', "Game Over");
@@ -54,7 +58,7 @@ AFRAME.registerComponent('collider-check', {
       maze_ui.setAttribute('visible', 'true');
       maze_text.setAttribute('value', "Restart");
       maze_intro.setAttribute('value', "You failed to find the treasure in time. Try again!");
-
+      vr_camera.setAttribute('sound', 'src', '#noise');
     }
   }
 });

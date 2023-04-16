@@ -28,6 +28,10 @@
       <a-asset-item id="maze_1" src="./src/gltf/nav-mesh.glb"></a-asset-item>
       <img id="logo" src="./public/img/logo.png">
       <img id="won" src="./public/img/won.png">
+      <audio id="noise" src="./public/sounds/noise.wav" preload="auto"></audio>
+      <audio id="win" src="./public/sounds/win.wav" preload="auto"></audio>
+      <audio id="click" src="./public/sounds/click.wav" preload="auto"></audio>
+      <audio id="bgm" src="./public/sounds/bgm.wav" preload="auto"></audio>
     </a-asset>
 
     <!-- grid box -->
@@ -37,7 +41,7 @@
     <!-- finish line -->
     <a-entity game_passed>
       <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="10" class="win"></a-plane>
-      <a-image position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2" visible="false"></a-image>
+      <a-image id="passed_image" position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2" visible="false" sound="src: #win"></a-image>
       <a-text position="0 2 -4" rotation="10 0 0" align="center" value="More levels coming soon"
         visible="false"></a-text>
     </a-entity>
@@ -51,7 +55,7 @@
         value='Welcome to "Hyper Maze", the ultimate virtual reality labyrinth challenge. Your objective is to navigate through the maze, avoid obstacles, and reach the endpoint before time runs out.'
         width="3" align="center"></a-text>
       <a-text id="maze_button" position="0 2 -0.2" align="center" value="Start" geometry="primitive:plane;height:0.4;"
-        class="ui"></a-text>
+        class="ui" sound="src: #click"></a-text>
     </a-entity>
 
     <!-- camera unit -->
@@ -63,7 +67,7 @@
 
       </a-entity>
 
-      <a-camera id="vr_camera" near="0.1" wasd-controls-enabled="false">
+      <a-camera id="vr_camera" near="0.1" wasd-controls-enabled="false" sound="src:#noise;autoplay:true;loop:true">
 
         <a-text color=" black" position="0 1 -2" align="center" width="3" value="5"
           geometry="primitive:plane;height:0.2; width:0.2" material="opacity:0" id="counter_ui"></a-text>
