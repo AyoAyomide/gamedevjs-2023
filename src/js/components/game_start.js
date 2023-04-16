@@ -1,4 +1,3 @@
-
 AFRAME.registerComponent('game_start', {
 
     init: function () {

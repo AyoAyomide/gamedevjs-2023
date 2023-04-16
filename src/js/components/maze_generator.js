@@ -36,5 +36,5 @@ AFRAME.registerComponent('maze_generator', {
                 }
             });
         });
-    }
+    },
 });
