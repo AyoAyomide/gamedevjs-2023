@@ -24,18 +24,23 @@
 
 <body>
   <!-- -->
-  <a-scene renderer="antialias: true" environment="preset: yavapai;playArea:2;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;">
+  <a-scene renderer="antialias: true" environment="preset: yavapai;playArea:2;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;groundColor:#BDB76B;groundColor2:#FFDAB9;dressingColor:#BDB76B;">
     
     <a-asset>
       <img id="logo" src="./src/img/logo.png">
       <img id="won" src="./src/img/won.png">
+      <img id="color" src="./src/img/texture/color2.png">
+      <img id="normal" src="./src/img/texture/normal2.png">
+      <img id="roughness" src="./src/img/texture/roughness2.png">
+      <img id="height" src="./src/img/texture/height.jpg">
+      <img id="ambient" src="./src/img/texture/ambient2.png">
       <audio id="noise" src="./src/sounds/noise.wav" preload="auto"></audio>
       <audio id="win" src="./src/sounds/win.wav" preload="auto"></audio>
       <audio id="click" src="./src/sounds/click.wav" preload="auto"></audio>
       <audio id="bgm" src="./src/sounds/bgm.wav" preload="auto"></audio>
     </a-asset>
 
-    <!-- <a-box position="0 0.5 0" shadow=""></a-box> -->
+    <!-- <a-box position="0 0.5 0" shadow="" material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;"></a-box> -->
     <!-- grid box -->
     <a-entity shadow="receive:false" maze_generator id="grid"></a-entity>
 
@@ -61,7 +66,7 @@
     </a-entity>
 
     <!-- camera unit -->
-    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 5"
+    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 20"
       movement-controls="camera:#vr_camera;speed: 0.5;enabled:true" material="opacity:0;">
 
       <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
