@@ -21,8 +21,8 @@ AFRAME.registerComponent('maze_generator', {
                     wall.setAttribute('geometry', "primitive: box; buffer: false");
                     wall.setAttribute('position', `${centerPos - cellIndex} 1.25 ${rowIndex + 0.5}`);
                     wall.setAttribute('scale', '1 2.5 1');
-                    wall.setAttribute('class', 'navmesh-hole');
-                    wall.setAttribute('material', 'side: double;color: #fff; metalness: 0.5; roughness: 0.5;');
+                    wall.setAttribute('class', 'box');
+                    // wall.setAttribute('material', 'side: double;color: #fff; metalness: 0.5; roughness: 0.5;');
                     parent.appendChild(wall);
                 }else{
                     // Add nav-mesh for path
