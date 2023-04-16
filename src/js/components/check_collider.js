@@ -56,8 +56,5 @@ AFRAME.registerComponent('collider-check', {
       maze_intro.setAttribute('value', "You failed to find the treasure in time. Try again!");
 
     }
-  },
-  tick: function () {
-    console.log(gamePassed,gameStarted);
   }
 });
