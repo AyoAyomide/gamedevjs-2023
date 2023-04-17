@@ -18,13 +18,13 @@
   <script src="/js/index.js"></script>
   <script type="module" src="./src/js/components/maze_generator.js"></script>
   <script type="module" src="./src/js/components/reset_coll.js"></script>
-  <script type="module" src="./src/js/components/check_collider.js"></script>
+  <script type="module" src="./src/js/components/game_started.js"></script>
   <script type="module" src="./src/js/components/game_passed.js"></script>
 </head>
 
 <body>
-  <!-- -->
-  <a-scene renderer="antialias: true" environment="preset: yavapai;playArea:2;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;groundColor:#BDB76B;groundColor2:#FFDAB9;dressingColor:#BDB76B;">
+  <!-- environment="preset: yavapai;playArea:5;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;"-->
+  <a-scene renderer="antialias: true" fog="color: #0a0a0a; near: 0; far: 80; density: 0">
     
     <a-asset>
       <img id="logo" src="./src/img/logo.png">
@@ -39,12 +39,20 @@
       <audio id="click" src="./src/sounds/click.wav" preload="auto"></audio>
       <audio id="bgm" src="./src/sounds/bgm.wav" preload="auto"></audio>
     </a-asset>
-
-    <!-- <a-box position="0 0.5 0" shadow="" material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;"></a-box> -->
+    <!-- the sky -->
+    <a-sky color="#ABE9FD" material="" geometry="radius: 400; segmentsWidth: 8; segmentsHeight: 2; thetaLength: 90" position=""></a-sky>
+    <!-- material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;" -->
+    <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false" color="#B57082"></a-cylinder>
+   
+    <!-- <a-box position="0 55 0" scale="1 110 1" shadow="receive:false"></a-box> -->
     <!-- grid box -->
-    <a-entity shadow="receive:false" maze_generator id="grid"></a-entity>
-
-
+    <a-entity shadow="" maze_generator id="grid"></a-entity>
+    <!-- floor -->
+    <a-plane color="#714728" material="roughness:0.7" position="" shadow="cast:false" color="grey" scale="300 300 0" rotation="-90 0 0"></a-plane>
+    <!-- light -->
+    <a-entity light="type: ambient; color: #BBB"></a-entity>
+    <a-entity light="intensity: 0.6; castShadow: true" position="393.93731 694.48727 -549.2554"></a-entity> 
+    
     <!-- finish line -->
     <a-entity game_passed id="finish_line">
       <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="10" class="win"></a-plane>
@@ -66,7 +74,7 @@
     </a-entity>
 
     <!-- camera unit -->
-    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 20"
+    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 80"
       movement-controls="camera:#vr_camera;speed: 0.5;enabled:true" material="opacity:0;">
 
       <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
@@ -88,5 +96,3 @@
 </body>
 
 </html>
-
-<!-- navmesh-constraint="navmesh:.navmesh; fall: 0.5; height: 1.65;" -->

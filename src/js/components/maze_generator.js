@@ -13,7 +13,7 @@ AFRAME.registerComponent('maze_generator', {
     },
     maze_gen: function (parent) {
         const mazeWidth = 15;
-        const mazeHeight = 30;
+        const mazeHeight = 100;
         const mazeDepth = 15;
         const centerPosX = (maze.level1[0].length - 1) * (mazeWidth / 2);
         const centerPosZ = (maze.level1.length - 1) * (mazeDepth / 2);
@@ -31,20 +31,20 @@ AFRAME.registerComponent('maze_generator', {
                     wall.setAttribute('geometry', "primitive: box; buffer: false");
                     wall.setAttribute('position', `${pos.z} ${pos.y} ${pos.x}`);
                     wall.setAttribute('scale', `${mazeWidth} ${mazeHeight} ${mazeDepth}`);
-                    // wall.setAttribute('shadow','');
                     wall.setAttribute('class', 'box');
-                    wall.setAttribute('material', 'src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:2 2;');
+                    wall.setAttribute('material', 'src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 1.5;');
                     parent.appendChild(wall);
                 }
             });
         });
+        // src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:2 2;
+
         // set ui position from parent first child
         let ui = document.querySelector('#maze_ui');
         let player = document.querySelector('#rig');
         let firstChildPos = parent.firstElementChild.object3D.position;
         setTimeout(() => {
-            // player.setAttribute('position',`0 0 ${firstChildPos.z * 2.3}`)
-            player.object3D.position.z = firstChildPos.z * 2.3;
+            // player.object3D.position.z = firstChildPos.z * 1.7;
             ui.object3D.position.z = firstChildPos.z * 1.6;
         }, 1);
 

@@ -9,8 +9,8 @@ AFRAME.registerComponent('collider-check', {
     this.el.addEventListener('raycaster-intersection', (event) => {
       let maze_button = document.querySelector('#maze_button');
       let vr_camera = document.querySelector('#vr_camera');
-      maze_button.components.sound.playSound();
       vr_camera.setAttribute('sound', 'src', '#bgm');
+      maze_button.components.sound.playSound();
       gameStarted = true;
       this.allowMovement();
       this.hideUI();
