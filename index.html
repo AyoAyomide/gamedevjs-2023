@@ -42,16 +42,16 @@
     <!-- the sky -->
     <a-sky color="#ABE9FD" material="" geometry="radius: 400; segmentsWidth: 8; segmentsHeight: 2; thetaLength: 90" position=""></a-sky>
     <!-- material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;" -->
-    <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false" color="#B57082"></a-cylinder>
+    <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false" material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:20 3;"></a-cylinder>
    
     <!-- <a-box position="0 55 0" scale="1 110 1" shadow="receive:false"></a-box> -->
     <!-- grid box -->
-    <a-entity shadow="" maze_generator id="grid"></a-entity>
+    <a-entity maze_generator id="grid"></a-entity>
     <!-- floor -->
     <a-plane color="#714728" material="roughness:0.7" position="" shadow="cast:false" color="grey" scale="300 300 0" rotation="-90 0 0"></a-plane>
     <!-- light -->
     <a-entity light="type: ambient; color: #BBB"></a-entity>
-    <a-entity light="intensity: 0.6; castShadow: true" position="393.93731 694.48727 -549.2554"></a-entity> 
+    <a-entity light="intensity: 0.6;" position="393.93731 694.48727 -549.2554"></a-entity> 
     
     <!-- finish line -->
     <a-entity game_passed id="finish_line">
@@ -74,7 +74,7 @@
     </a-entity>
 
     <!-- camera unit -->
-    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 80"
+    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 101"
       movement-controls="camera:#vr_camera;speed: 0.5;enabled:true" material="opacity:0;">
 
       <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
