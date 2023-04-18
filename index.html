@@ -78,7 +78,7 @@
     </a-entity>
 
     <!-- camera unit -->
-    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 6"
+    <a-entity reset-on-collision="with: .box" id="rig" position="0 0 100"
       movement-controls="camera:#vr_camera;speed: 0.5;enabled:false" material="opacity:0;">
 
       <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
@@ -88,7 +88,7 @@
 
       <a-camera id="vr_camera" wasd-controls-enabled="false" sound="src:#noise;autoplay:true;loop:true">
 
-        <a-text color=" black" position="0 1 -2" align="center" width="3" value="5"
+        <a-text color=" black" position="0 1 -2" align="center" width="3" value=""
           geometry="primitive:plane;height:0.2; width:0.2" material="opacity:0" id="counter_ui"></a-text>
 
       </a-camera>

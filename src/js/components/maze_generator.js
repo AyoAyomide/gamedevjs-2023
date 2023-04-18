@@ -44,8 +44,8 @@ AFRAME.registerComponent('maze_generator', {
         let player = document.querySelector('#rig');
         let firstChildPos = parent.firstElementChild.object3D.position;
         setTimeout(() => {
-            player.object3D.position.z = firstChildPos.z * 1.7;
-            ui.object3D.position.z = firstChildPos.z * 1.6;
+            // player.object3D.position.z = firstChildPos.z * 1.7;
+            // ui.object3D.position.z = firstChildPos.z * 1.6;
         }, 1);
 
         // set finish line position
