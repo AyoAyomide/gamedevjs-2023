@@ -1,21 +1,25 @@
 /**
- * Check if the raycaster is intersecting with an object.
+ * start clicked
+ * 
  */
-
 AFRAME.registerComponent('collider-check', {
   dependencies: ['raycaster'],
-
   init: function () {
     this.el.addEventListener('raycaster-intersection', (event) => {
-      let maze_button = document.querySelector('#maze_button');
-      let vr_camera = document.querySelector('#vr_camera');
-      vr_camera.setAttribute('sound', 'src', '#bgm');
-      maze_button.components.sound.playSound();
-      gameStarted = true;
-      this.allowMovement();
-      this.hideUI();
-      this.startCounter();
+      scene.dispatchEvent(startGame);
+
+      // let maze_button = document.querySelector('#maze_button');
+      // let vr_camera = document.querySelector('#vr_camera');
+      // vr_camera.setAttribute('sound', 'src', '#bgm');
+      // maze_button.components.sound.playSound();
+      // gameStarted = true;
+      // this.allowMovement();
+      // this.hideUI();
+      // this.startCounter();
     });
+  },
+  tick: function () {
+    // console.log(gameStarted);
   },
   allowMovement: function () {
     let player = document.querySelector('#rig');

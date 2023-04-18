@@ -12,9 +12,9 @@ AFRAME.registerComponent('maze_generator', {
         this.maze_gen(parent);
     },
     maze_gen: function (parent) {
-        const mazeWidth = 20;
-        const mazeHeight = 100;
-        const mazeDepth = 20;
+        const mazeWidth = 1;
+        const mazeHeight = 1;
+        const mazeDepth = 1;
         const centerPosX = (maze.level1[0].length - 1) * (mazeWidth / 2);
         const centerPosZ = (maze.level1.length - 1) * (mazeDepth / 2);
         let pos;
