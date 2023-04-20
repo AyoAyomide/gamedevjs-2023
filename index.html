@@ -20,16 +20,18 @@
   <script type="module" src="./src/js/components/reset_coll.js"></script>
   <script type="module" src="./src/js/components/game_started.js"></script>
   <script type="module" src="./src/js/components/game_passed.js"></script>
+  <script type="module" src="./src/js/components/game_end.js"></script>
 </head>
 
 <body>
   <!-- environment="preset: yavapai;playArea:5;shadow:true;lightPosition:0 40 -45;horizonColor:#bde0fe;skyColor:#1d3557;"-->
-  <!-- fog="color: #0a0a0a; near: 0; far: 80; density: 0" -->
-  <a-scene id="scene" renderer="antialias: true">
+  <!--  -->
+  <a-scene id="scene" fog="color: #0a0a0a; near: 0; far: 80; density: 0" renderer="antialias: true">
 
     <a-asset>
       <img id="logo" src="./src/img/logo.png">
       <img id="won" src="./src/img/won.png">
+      <img id="wall_color" src="./src/img/texture/wall_color.jpg">
       <img id="color" src="./src/img/texture/color2.png">
       <img id="normal" src="./src/img/texture/normal2.png">
       <img id="roughness" src="./src/img/texture/roughness2.png">
@@ -45,7 +47,7 @@
       position=""></a-sky>
     <!-- material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;" -->
     <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false"
-      material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:20 3;"></a-cylinder>
+      material="src:#wall_color;repeat:20 3;"></a-cylinder>
 
     <!-- <a-box position="0 55 0" scale="1 110 1" shadow="receive:false"></a-box> -->
     <!-- grid box -->
@@ -60,10 +62,15 @@
     <!-- finish line -->
     <a-entity game_passed id="finish_line">
       <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="10" class="win"></a-plane>
-      <a-image id="passed_image" position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2" visible="false"
-        sound="src: #win"></a-image>
-      <a-text position="0 2 -4" rotation="10 0 0" align="center" value="More levels coming soon"
-        visible="false"></a-text>
+      <a-entity position="0 1.5 -0.5" sound="src: #win">
+
+        <a-image position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2"></a-image>
+        <a-text position="0 2 -4" rotation="10 0 0" align="center" value="More levels coming soon"></a-text>
+        <a-text game_end position="0 1.5 -4" align="center" value="Restart"
+          geometry="primitive:plane;height:0.4;" class="ui" sound="src: #click"></a-text>
+
+      </a-entity>
+
     </a-entity>
 
     <!-- maze ui -->
@@ -71,9 +78,9 @@
       <a-image position="0 4.5 -0.2" rotation="10 0 0" src="#logo" width="5" height="1" material=""
         geometry=""></a-image>
       <a-text id="maze_intro" position="0 3 -0.2"
-        value='Welcome to "Hyper Maze", the ultimate virtual reality labyrinth challenge. Your objective is to navigate through the maze, avoid obstacles, and reach the endpoint before time runs out.'
+        value='Welcome to Hyper Maze, the ultimate virtual reality labyrinth challenge. Your objective is to navigate through the maze, avoid obstacles, and reach the endpoint before time runs out.'
         width="3" align="center"></a-text>
-      <a-text id="maze_button" position="0 2 -0.2" align="center" value="Start" geometry="primitive:plane;height:0.4;"
+      <a-text id="maze_button"  position="0 2 -0.2" align="center" value="Start" geometry="primitive:plane;height:0.4;"
         class="ui" sound="src: #click"></a-text>
     </a-entity>
 
@@ -86,14 +93,14 @@
 
       </a-entity>
 
-      <a-camera id="vr_camera" wasd-controls-enabled="false" sound="src:#noise;autoplay:true;loop:true">
+      <a-camera id="vr_camera" wasd-controls-enabled="false" sound="src:#noise;autoplay:true;loop:true;volume:0.1">
 
         <a-text color=" black" position="0 1 -2" align="center" width="3" value=""
           geometry="primitive:plane;height:0.2; width:0.2" material="opacity:0" id="counter_ui"></a-text>
 
       </a-camera>
       <a-entity id="left" oculus-touch-controls="hand: left"></a-entity>
-      <a-entity collider-check laser-controls="hand: right" raycaster="objects: .ui" id="rightHand"></a-entity>
+      <a-entity game_started laser-controls="hand: right" raycaster="objects: .ui" id="rightHand"></a-entity>
     </a-entity>
 
   </a-scene>

@@ -8,8 +8,11 @@ let gameLevel = 1;
 const startGame = new Event("gameStarted");
 const endGame = new Event("gameEnded");
 
+let globalScene = {}
+
 
 window.onload = () => {
+
 
     // scene element
     const scene = document.querySelector('#scene');
@@ -24,17 +27,23 @@ window.onload = () => {
     const counterText = document.querySelector('#counter_ui');
     // maze elements
     const maze = document.querySelector('#grid');
+    // finish line ui elements
+    const wonImage = document.querySelector('passed_image');
+
+    // set global scene
+    globalScene = { scene, player, camera, startButton, startUiEntity, startUiText, counterText, maze, wonImage };
 
     // init functions
-    setPosition(player,3);
+    setPosition(player, 3);
     setPosition(startUiEntity);
 
     // Listen for start event.
     scene.addEventListener("gameStarted",
         () => {
-            let timeout = 5;
+            let timeout = 20;
             let countDown = 1000;
             gameStarted = true;
+            gamePassed = false;
             // set counter text
             counterText.setAttribute('value', timeout);
             // start bgm
@@ -50,7 +59,14 @@ window.onload = () => {
                 if (!gamePassed && timeout > 0) {
                     counterText.setAttribute('value', timeout);
                     timeout--;
-                } else {
+                } else if (gamePassed) {
+                    clearInterval(gameLoop);
+                    counterText.setAttribute('value', "You Won");
+
+                    // dispatch end event
+                    // scene.dispatchEvent(endGame);
+                }
+                else {
                     clearInterval(gameLoop);
                     counterText.setAttribute('value', "Game Over");
                     // dispatch end event
@@ -65,6 +81,7 @@ window.onload = () => {
     scene.addEventListener("gameEnded",
         () => {
             gameStarted = false;
+            gamePassed = false;
             // stop bgm
             camera.setAttribute('sound', 'src', '#noise');
             // disable movement
@@ -73,12 +90,12 @@ window.onload = () => {
             startUiEntity.setAttribute('visible', 'true');
             startUiEntity.object3D.position.y = 0;
             // set player position
-            setPosition(player,3);
+            setPosition(player, 3);
         },
         false
     );
 
-    function setPosition(entity,distance = 0) {
+    function setPosition(entity, distance = 0) {
         // set player position
         entity.object3D.position.set(0, 0, maze.firstElementChild.object3D.position.z * 1.5 + distance)
     }

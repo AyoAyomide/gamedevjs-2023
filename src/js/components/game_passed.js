@@ -1,24 +1,26 @@
+/**
+ * player passed the game
+ */
 AFRAME.registerComponent('game_passed', {
-    schema: {
-
-    },
-
     init: function () {
-        let passedImage = document.querySelector('#passed_image');
-        let vr_camera = document.querySelector('#vr_camera');
+        this.el.lastElementChild.object3D.position.y = -100;
         this.el.addEventListener('hitstart', (e) => {
+            this.el.lastElementChild.object3D.position.y = 1.5;
+            this.el.lastElementChild.components.sound.playSound();
+
             gamePassed = true;
             gameStarted = false;
-            let children = this.el.children;
-            for (let i = 0; i < children.length; i++) {
-                let child = children[i];
-                child.setAttribute('visible', 'true')
-            }
-            passedImage.components.sound.playSound();
-            vr_camera.components.sound.stopSound();
+
+            globalScene.camera.components.sound.stopSound();
             setTimeout(() => {
-                vr_camera.setAttribute('sound', 'src', '#noise');
+                globalScene.camera.setAttribute('sound', 'src', '#noise');
             }, 5000);
+
+        });
+
+        this.el.firstElementChild.addEventListener('raycaster-intersection', (event) => {
+            console.log(event);
+            globalScene.scene.dispatchEvent(endGame);
         });
     },
 });
