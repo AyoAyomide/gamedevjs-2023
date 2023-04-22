@@ -3,9 +3,9 @@
  */
 AFRAME.registerComponent('game_passed', {
     init: function () {
-        this.el.lastElementChild.object3D.position.y = -100;
         this.el.addEventListener('hitstart', (e) => {
             this.el.lastElementChild.object3D.position.y = 1.5;
+            this.el.lastElementChild.setAttribute('visible', 'true');
             this.el.lastElementChild.components.sound.playSound();
 
             gamePassed = true;
@@ -14,13 +14,8 @@ AFRAME.registerComponent('game_passed', {
             globalScene.camera.components.sound.stopSound();
             setTimeout(() => {
                 globalScene.camera.setAttribute('sound', 'src', '#noise');
+                globalScene.camera.setAttribute('sound', 'volume', '0.1');
             }, 5000);
-
-        });
-
-        this.el.firstElementChild.addEventListener('raycaster-intersection', (event) => {
-            console.log(event);
-            globalScene.scene.dispatchEvent(endGame);
         });
     },
 });

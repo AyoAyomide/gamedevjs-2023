@@ -6,8 +6,10 @@ AFRAME.registerComponent('game_started', {
   dependencies: ['raycaster'],
   init: function () {
     this.el.addEventListener('raycaster-intersection', (event) => {
-      console.log(event);
-      scene.dispatchEvent(startGame);
+      is_intersecting = true;
     });
-  }
+    this.el.addEventListener('raycaster-intersected-cleared', (event) => {
+      is_intersecting = false;
+    });
+  },
 });

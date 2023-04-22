@@ -10,6 +10,9 @@ const endGame = new Event("gameEnded");
 
 let globalScene = {}
 
+let is_intersected = false;
+let is_intersecting = false;
+
 
 window.onload = () => {
 
@@ -20,7 +23,7 @@ window.onload = () => {
     const player = document.querySelector('#rig');
     const camera = document.querySelector('#vr_camera');
     // maze ui elements
-    const startButton = document.querySelector('#maze_button');
+    const startButton = document.querySelector('#start_button');
     const startUiEntity = document.querySelector('#maze_ui');
     const startUiText = document.querySelector('#maze_intro');
     // counter ui elements
@@ -28,10 +31,10 @@ window.onload = () => {
     // maze elements
     const maze = document.querySelector('#grid');
     // finish line ui elements
-    const wonImage = document.querySelector('passed_image');
+    const finishUiEntity = document.querySelector('#finish_ui');
 
     // set global scene
-    globalScene = { scene, player, camera, startButton, startUiEntity, startUiText, counterText, maze, wonImage };
+    globalScene = { scene, player, camera, startButton, startUiEntity, startUiText, counterText, maze, finishUiEntity };
 
     // init functions
     setPosition(player, 3);
@@ -40,7 +43,7 @@ window.onload = () => {
     // Listen for start event.
     scene.addEventListener("gameStarted",
         () => {
-            let timeout = 20;
+            let timeout = 50;
             let countDown = 1000;
             gameStarted = true;
             gamePassed = false;
@@ -48,6 +51,7 @@ window.onload = () => {
             counterText.setAttribute('value', timeout);
             // start bgm
             camera.setAttribute('sound', 'src', '#bgm');
+            camera.setAttribute('sound','volume', '1');
             // enable movement
             player.setAttribute('movement-controls', "enabled", "true");
             // hide maze ui
@@ -67,6 +71,7 @@ window.onload = () => {
                     // scene.dispatchEvent(endGame);
                 }
                 else {
+                    console.log('game over');
                     clearInterval(gameLoop);
                     counterText.setAttribute('value', "Game Over");
                     // dispatch end event
@@ -84,6 +89,7 @@ window.onload = () => {
             gamePassed = false;
             // stop bgm
             camera.setAttribute('sound', 'src', '#noise');
+            camera.setAttribute('sound','volume', '0.1');
             // disable movement
             player.setAttribute('movement-controls', "enabled", "false");
             // show maze ui
