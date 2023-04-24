@@ -31,7 +31,8 @@ AFRAME.registerComponent('maze_generator', {
                     wall.setAttribute('position', `${wallPosition.z} ${wallPosition.y} ${wallPosition.x}`);
                     wall.setAttribute('scale', `${mazeWidth} ${mazeHeight} ${mazeDepth}`);
                     wall.setAttribute('class', 'box');
-                    wall.setAttribute('material', 'src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 1.5;roughness:1;');
+                    wall.setAttribute('material', 'roughness:1;color:#6c584c');
+                    // wall.setAttribute('material', 'src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 1.5;roughness:1;');
                     parent.appendChild(wall);
                 }
             });
