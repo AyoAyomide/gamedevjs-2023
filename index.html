@@ -31,12 +31,15 @@
     <a-asset>
       <img id="logo" src="./src/img/logo.png">
       <img id="won" src="./src/img/won.png">
-      <img id="wall_color" src="./src/img/texture/wall_color.jpg">
-      <img id="color" src="./src/img/texture/color2.png">
-      <img id="normal" src="./src/img/texture/normal2.png">
-      <img id="roughness" src="./src/img/texture/roughness2.png">
-      <img id="height" src="./src/img/texture/height.jpg">
-      <img id="ambient" src="./src/img/texture/ambient2.png">
+
+      <img id="wall_color" src="./src/img/texture/w1_color.jpg">
+
+      <img id="color" src="./src/img/texture/brick_color.jpg">
+      <img id="normal" src="./src/img/texture/brick_normal.jpg">
+      <img id="roughness" src="./src/img/texture/brick_roughness.jpg">
+      <img id="height" src="./src/img/texture/brick_height.png">
+      <img id="ambient" src="./src/img/texture/brick_ao.jpg">
+
       <audio id="noise" src="./src/sounds/noise.wav" preload="auto"></audio>
       <audio id="win" src="./src/sounds/win.wav" preload="auto"></audio>
       <audio id="click" src="./src/sounds/click.wav" preload="auto"></audio>
@@ -47,7 +50,7 @@
       position=""></a-sky>
     <!-- material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;" -->
     <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false"
-      material="src:#wall_color;repeat:20 3;"></a-cylinder>
+      material="src:#wall_color;repeat:15 1.5;"></a-cylinder>
 
     <!-- <a-box position="0 55 0" scale="1 110 1" shadow="receive:false"></a-box> -->
     <!-- grid box -->
@@ -61,7 +64,7 @@
 
     <!-- finish line -->
     <a-entity game_passed id="finish_line">
-      <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="10" class="win"></a-plane>
+      <a-plane color="green" rotation="-90 0 0" position="0 0.1 -2" width="15" class="win"></a-plane>
       <a-entity id="finish_ui" position="0 -100 -0.5" sound="src: #win">
 
         <a-image position="0 3 -4" rotation="10 0 0" src="#won" width="4" height="2"></a-image>
@@ -86,7 +89,7 @@
 
     <!-- camera unit -->
     <a-entity reset-on-collision="with: .box" id="rig" position="0 0 100"
-      movement-controls="camera:#vr_camera;speed: 0.5;enabled:true" material="opacity:0;">
+      movement-controls="camera:#vr_camera;speed: 0.5;enabled:false" material="opacity:0;">
 
       <a-entity aabb-collider="objects: .win;" id="player" geometry="primitive:box;height:2;width:0.5;" position="0 1 0"
         visible="false">

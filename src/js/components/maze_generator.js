@@ -39,6 +39,6 @@ AFRAME.registerComponent('maze_generator', {
 
         // set finish line position
         let line = document.querySelector('#finish_line');
-        line.setAttribute('position', `0 0 ${wallPosition.x + -2}`);
+        line.setAttribute('position', `-60 0 ${wallPosition.x * 1.2 - 0.5}`);
     },
 });
