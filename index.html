@@ -32,6 +32,13 @@
       <img id="logo" src="./src/img/logo.png">
       <img id="won" src="./src/img/won.png">
 
+      <img id="wall_color" src="./src/img/texture/wall_color.jpg">
+      <img id="color" src="./src/img/texture/color2.png">
+      <img id="normal" src="./src/img/texture/normal2.png">
+      <img id="roughness" src="./src/img/texture/roughness2.png">
+      <img id="height" src="./src/img/texture/height.jpg">
+      <img id="ambient" src="./src/img/texture/ambient2.png">
+
       <audio id="noise" src="./src/sounds/noise.wav" preload="auto"></audio>
       <audio id="win" src="./src/sounds/win.wav" preload="auto"></audio>
       <audio id="click" src="./src/sounds/click.wav" preload="auto"></audio>
@@ -42,7 +49,7 @@
       position=""></a-sky>
     <!-- material="src:#color;normalMap:#normal;ambientOcclusionMap:#ambient;roughnessMap:#roughness;repeat:0.5 0.5;" -->
     <a-cylinder open-ended="true" side="back" position="0 35 0" scale="150 70 150" shadow="cast:false"
-      material="color:#463f3a;roughness:1;"></a-cylinder>
+    material="src:#wall_color;repeat:15 1.5;"></a-cylinder>
 
     <!-- <a-box position="0 55 0" scale="1 110 1" shadow="receive:false"></a-box> -->
     <!-- grid box -->
